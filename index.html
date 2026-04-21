@@ -39,7 +39,7 @@
     /* NAVBAR */
     nav {
       position:fixed; top:0; left:0; right:0; height:var(--nav-h); z-index:500;
-      padding:0 48px; display:flex; align-items:center; justify-content:space-between;
+      padding:0 40px; display:flex; align-items:center; justify-content:space-between;
       transition:background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
     }
     nav.scrolled {
@@ -436,29 +436,84 @@
     @keyframes waRing { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.28);opacity:0} }
 
     /* RESPONSIVE */
-    @media(max-width:1100px){ .svc-grid{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:960px){
-      nav,section,footer,#emergencia{padding-left:24px;padding-right:24px}
-      .hero{padding-left:24px;padding-right:24px}
-      .hero-inner{grid-template-columns:1fr;text-align:center}
-      .hero-visual,.about-visual{display:none}
-      .hero-content{padding-bottom:60px}
-      .hero-sub{max-width:100%}
-      .hero-actions,.hero-stats{justify-content:center}
-      .nav-links,.nav-open-badge{display:none}
-      .nav-mobile-btn{display:flex}
-      .emg-box{grid-template-columns:1fr;text-align:center;padding:48px 32px}
-      .emg-cta{align-items:center}
-      .emg-text{margin:0 auto}
-      .about-grid,.contact-grid{grid-template-columns:1fr}
-      .rev-grid{grid-template-columns:1fr}
-      .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+    @media(max-width:1100px){
+      .svc-grid{grid-template-columns:repeat(2,1fr)}
     }
+
+    @media(max-width:960px){
+      /* Navbar mobile */
+      nav { padding:0 20px; height:68px; --nav-h:68px; }
+      .nav-links { display:none; }
+      .nav-open-badge { display:none; }
+      .nav-right { display:none; }
+      .nav-mobile-btn { display:flex; }
+      /* Show compact CTA on mobile inside nav */
+      .nav-cta-mobile {
+        display:inline-flex !important;
+        align-items:center; gap:8px;
+        background:linear-gradient(135deg,var(--orange),var(--orange-light));
+        color:white; text-decoration:none;
+        padding:10px 18px; border-radius:50px;
+        font-size:13px; font-weight:800;
+        box-shadow:0 4px 14px rgba(255,107,53,0.38);
+      }
+
+      /* Hero */
+      .hero { padding:68px 20px 0; }
+      .hero-inner { grid-template-columns:1fr; text-align:center; gap:0; }
+      .hero-visual { display:none; }
+      .hero-content { padding-bottom:56px; }
+      .hero-sub { max-width:100%; font-size:15px; }
+      .hero-actions { justify-content:center; flex-direction:column; align-items:center; }
+      .hero-actions a { width:100%; max-width:320px; justify-content:center; }
+      .hero-stats { justify-content:center; flex-wrap:wrap; gap:20px; }
+      .hero-stat { padding:0 20px 0 0; margin-right:20px; }
+      .hero-badge { font-size:11px; padding:7px 14px; }
+      .hero-title { font-size:clamp(36px,9vw,52px); }
+
+      /* Sections padding */
+      section { padding:64px 20px; }
+      #emergencia { padding:0 20px 64px; }
+      footer { padding:48px 20px 28px; }
+
+      /* Services */
+      .svc-grid { grid-template-columns:1fr; gap:14px; }
+      .svc-hd { margin-bottom:40px; }
+
+      /* Emergency box */
+      .emg-box { grid-template-columns:1fr; text-align:center; padding:44px 28px; gap:36px; border-radius:24px; }
+      .emg-cta { align-items:center; }
+      .emg-text { margin:0 auto; font-size:15px; }
+      .emg-phone { padding:18px 28px; font-size:20px; }
+      .emg-note { text-align:center; }
+
+      /* Reviews */
+      .rev-grid { grid-template-columns:1fr; }
+      .rev-top { flex-direction:column; align-items:flex-start; gap:20px; }
+      .g-rating { width:100%; }
+      .g-num { font-size:40px; }
+
+      /* About */
+      .about-grid { grid-template-columns:1fr; gap:40px; }
+      .about-visual { display:none; }
+
+      /* Contact */
+      .contact-grid { grid-template-columns:1fr; }
+      .contact-card { padding:28px 24px; }
+
+      /* Footer */
+      .foot-top { grid-template-columns:1fr; gap:32px; }
+      .foot-desc { max-width:100%; }
+    }
+
     @media(max-width:600px){
-      .svc-grid{grid-template-columns:1fr}
-      .foot-top{grid-template-columns:1fr}
-      .rev-top{flex-direction:column;align-items:flex-start}
-      .hero-stats{flex-wrap:wrap;gap:18px}
+      .hero-stats { gap:16px; }
+      .hero-stat { padding:0 16px 0 0; margin-right:16px; }
+      .hero-stat-n { font-size:26px; }
+      .svc-grid { grid-template-columns:1fr; }
+      .foot-top { grid-template-columns:1fr; }
+      .emg-phone { font-size:18px; padding:16px 22px; }
+      .sec-title { font-size:clamp(28px,8vw,40px); }
     }
   </style>
 </head>
@@ -489,14 +544,17 @@
       <div class="nav-open-dot"></div>
       Aberto 24h
     </div>
-    <a href="tel:+553138925130" class="nav-cta">📞 (31) 3892-5130</a>
+    <a href="tel:+553138925130" class="nav-cta">📞 Agendar</a>
   </div>
 
-  <button class="nav-mobile-btn" id="mBtn" aria-label="Menu">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="tel:+553138925130" class="nav-cta-mobile" style="display:none">📞 Agendar</a>
+    <button class="nav-mobile-btn" id="mBtn" aria-label="Menu">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
 </nav>
 
 <!-- ═══ HERO ══════════════════════════════════════════ -->
@@ -511,7 +569,7 @@
       <p class="hero-sub">Hospital veterinário completo para cães e gatos em Viçosa. Atendimento 24h com equipe qualificada, estrutura moderna e muito carinho.</p>
       <div class="hero-actions">
         <a href="tel:+553138925130" class="btn-primary">📞 Ligar agora</a>
-        <a href="#servicos" class="btn-ghost">Ver serviços →</a>
+        <a href="#servicos" class="btn-ghost">Ver serviços</a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat"><div class="hero-stat-n">24h</div><div class="hero-stat-l">Funcionamento</div></div>
